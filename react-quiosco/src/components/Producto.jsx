@@ -1,7 +1,6 @@
+import { formatearDinero } from "../helpers"
 
 export default function Producto({producto}) {
-
-  console.log(producto)
 
   const { nombre, imagen, precio } = producto
 
@@ -16,9 +15,16 @@ export default function Producto({producto}) {
         <div className="p-5">
             <h3 className="text-2xl font-bold">{nombre}</h3>
             <p className="mt-5 font-black text-4xl text-amber-500">
-                ${precio}
+                {formatearDinero(precio)}
             </p>
         </div>
+
+        <button
+          type="button"
+          className="bg-indigo-600 hover:bg-indigo-800 text-white w-full mt-5 p-3 uppercase font-bold"
+        >
+          Agregar
+        </button>
 
     </div>
 
