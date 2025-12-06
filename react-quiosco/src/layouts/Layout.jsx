@@ -2,6 +2,7 @@ import { Outlet } from "react-router-dom"
 import Modal from 'react-modal'
 import Sidebar from "../components/Sidebar"
 import Resumen from "../components/Resumen"
+import ModalProducto from "../components/ModalProducto"
 import useQuiosco from "../hooks/useQuiosco"
 
 const customStyles = {
@@ -15,9 +16,11 @@ const customStyles = {
   },
 };
 
+Modal.setAppElement('#root')
+
 export default function Layout() {   
 
-  const { modal } = useQuiosco();
+  const { modal, handleClickModal } = useQuiosco();
 
   console.log("Elmodal",modal)
 
@@ -35,6 +38,13 @@ export default function Layout() {
         <Resumen/>
 
       </div>
+
+      {
+          <Modal isOpen={modal} style={customStyles}>
+              <ModalProducto />
+          </Modal>
+      }
+
     </>
   )
 }
