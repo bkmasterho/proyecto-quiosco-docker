@@ -24,9 +24,13 @@ const QuioscoProvider = ({children}) => {
     }
 
     const obtenerCategorias = async () => {
+
         
         try {
+            
+            console.log("VITE_API: ", import.meta.env.VITE_API_URL);
             const {data} = await axios('http://localhost/api/categorias');
+            console.log("la dataaa", data)
             setCategorias(data.data);
             setCategoriaActual(data.data[0])
         } catch (error) {   
