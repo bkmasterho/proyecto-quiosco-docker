@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react"
-import axios from 'axios';
+import clienteAxios from "../config/axios";
 
 const QuioscoContext = createContext();
 
@@ -28,8 +28,7 @@ const QuioscoProvider = ({children}) => {
         
         try {
             
-            console.log("VITE_API: ", import.meta.env.VITE_API_URL);
-            const {data} = await axios('http://localhost/api/categorias');
+            const { data } = await clienteAxios('/api/categorias');
             console.log("la dataaa", data)
             setCategorias(data.data);
             setCategoriaActual(data.data[0])

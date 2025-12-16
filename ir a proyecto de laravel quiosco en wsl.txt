@@ -1,1 +1,4 @@
 cd ~/proyectos/laravel-quiosco
+
+Creando Migration con recursos para api:
+./vendor/bin/sail artisan make:model Producto --resource --api --migration
