@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+//sail artisan migrate:refresh --seed
 
 use Carbon\Carbon;
 use Illuminate\Database\Seeder;
