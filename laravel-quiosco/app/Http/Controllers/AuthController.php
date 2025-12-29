@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RegistroRequest;
 use Illuminate\Http\Request;
 
 //sail artisan make:controller AuthController
@@ -9,7 +10,7 @@ use Illuminate\Http\Request;
 class AuthController extends Controller
 {
     
-    public function register(Request $request){
+    public function register(RegistroRequest $request){
         
     }
     
