@@ -11,7 +11,8 @@ class AuthController extends Controller
 {
     
     public function register(RegistroRequest $request){
-        
+        //Validar el registro
+        $data = $request->validated();
     }
     
     public function login(Request $request){
