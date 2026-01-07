@@ -29,7 +29,8 @@ export default function Registro() {
 
     } catch (error) {
       
-      console.log(error);
+      console.log("LOS ERRORESSS", error);
+      console.log(Object.values(error.response.data.errors));
 
     }
 
