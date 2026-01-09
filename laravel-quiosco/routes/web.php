@@ -1,6 +1,7 @@
 <?php
 
-use App\Http\Controllers\CategoriaController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoriaController;
 
 Route::get('/categorias', [CategoriaController::class,'index']);

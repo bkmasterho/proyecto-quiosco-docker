@@ -1,6 +1,7 @@
 import { createRef, useState } from 'react'
 import { Link } from "react-router-dom"
 import clienteAxios from '../config/axios';
+import Alerta from '../components/Alerta';
 
 
 export default function Registro() {
@@ -24,13 +25,13 @@ export default function Registro() {
 
     try {
 
-      const respuesta = await clienteAxios.post('/api/registro', datos);
-      console.log(respuesta);
+      await clienteAxios.get('/sanctum/csrf-cookie');
+      const {data} = await clienteAxios.post('/api/registro', datos);
+      console.log(data.token);
 
     } catch (error) {
-      
-      console.log("LOS ERRORESSS", error);
-      console.log(Object.values(error.response.data.errors));
+
+      setErrores(Object.values(error.response.data.errors));
 
     }
 
@@ -47,6 +48,7 @@ export default function Registro() {
             onSubmit={handleSubmit}
             noValidate
           >
+              {errores ? errores.map((error,i) => <Alerta key={i}>{error}</Alerta>) : null}
 
               <div className="mb-4">
                 <label
