@@ -26,6 +26,7 @@ export default function Login() {
         console.log(data.token);
 
       } catch (error) {
+        console.log(error);
         setErrores(Object.values(error.response.data.errors));
       }
 
