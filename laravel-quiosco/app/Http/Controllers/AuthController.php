@@ -38,8 +38,15 @@ class AuthController extends Controller
         if(!Auth::attempt($data)){
             return response([
                 'errors' => ['El email o el password son incorrectos']
-            ], 422);
+            ], 422); //422 Indica que los datos asi no funcionaran.
         }
+
+        //Autenticar el usuario
+        $user = Auth::user();
+        return [
+            'token' => $user->createToken('token')->plainTextToken,
+            'user' => $user
+        ];
 
     }
     
