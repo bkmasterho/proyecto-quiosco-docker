@@ -8,7 +8,9 @@ const QuioscoProvider = ({children}) => {
     const [categorias, setCategorias] = useState([]);
     const [categoriaActual, setCategoriaActual] = useState({})  
     const [modal, setModal] = useState(false)
-    const [producto, setProducto] = useState({})
+    const [producto, setProducto] = useState([])
+    const [pedido, setPedido] = useState([]);
+    const [total, setTotal] = useState(0);
 
     const handleClickCategoria = id => {
         const categoria = categorias.filter(categoria => categoria.id === id)[0];
@@ -19,8 +21,11 @@ const QuioscoProvider = ({children}) => {
         setModal(!modal)
     }
 
-    const handleSetProducto = producto => {
-        setProducto(producto);
+    const handleSetProducto = productoNuevo => {
+         setProducto(prevProductos => [
+            ...prevProductos,
+            productoNuevo
+        ]);
     }
 
     const obtenerCategorias = async () => {
@@ -38,6 +43,33 @@ const QuioscoProvider = ({children}) => {
 
     }
 
+    const handleSubmitNuevaOrden = async (totalAPI) => {
+
+        const token = localStorage.getItem('AUTH_TOKEN');
+        console.log("Totaaal", totalAPI);
+
+        try {
+            await clienteAxios.post('/api/pedidos',
+            {
+                totalAPI,
+                productos: producto.map((prod, cant) => {
+                    return {
+                        id:prod.id,
+                        cantidad:cant + 1
+                    }
+                })
+
+            },
+            {
+                headers:{
+                    Authorization: `Bearer ${token}`,
+                }
+            })
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     useEffect(() => {
         obtenerCategorias();
     },[])
@@ -51,7 +83,11 @@ const QuioscoProvider = ({children}) => {
                 modal,
                 handleClickModal,
                 producto,
-                handleSetProducto
+                handleSetProducto,
+                pedido,
+                total,
+                setTotal,
+                handleSubmitNuevaOrden
             }}
         >{children}</QuioscoContext.Provider>
     )

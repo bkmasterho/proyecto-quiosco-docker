@@ -9,10 +9,12 @@ export default function Login() {
   const passwordRef = createRef();
 
   const [errores, setErrores] = useState([]);
+
   const { login } = useAuth({
     middleware:'guest',
     url:'/'
   })
+  
 
   const handleSubmit = async e => {
 
